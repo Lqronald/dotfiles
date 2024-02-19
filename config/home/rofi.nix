@@ -21,6 +21,16 @@ in {
       display-drun:	    "   Apps ";
       display-run:	    "   Run ";
       display-filebrowser:  "   File ";
+
+    /* Highlight an entry under the mouse pointer */
+      hover-select: true;
+
+      /* Disable MousePrimary as an entry selector */
+      /* Without this setting you won't be able to set MousePrimary as an entry acceptor. */
+      me-select-entry: "";
+
+      /* Use either LMB single click or RMB single click or LMB double click to accept an entry */
+      me-accept-entry: [ MousePrimary, MouseSecondary, MouseDPrimary ];
     }
 
     window { 

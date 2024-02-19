@@ -15,8 +15,8 @@ in {
         "notification-icon-size": 64,
         "notification-body-image-height": 100,
         "notification-body-image-width": 200,
-        "timeout": 10,
-        "timeout-low": 5,
+        "timeout": 3,
+        "timeout-low": 2,
         "timeout-critical": 0,
         "fit-to-screen": false,
         "control-center-width": 500,
@@ -71,8 +71,8 @@ in {
                         "command": "systemctl reboot"
                     },
                     {
-                        "label": "",
-                        "command": "thunar"
+                        "label": "",
+                        "command": "hyprctl dispatch exit 0"
                     },
                     {
                         "label": "",
@@ -99,8 +99,8 @@ in {
                         "command": "firefox"
                     },
                     {
-                        "label": "",
-                        "command": "obs"
+                        "label": "",
+                        "command": "thunar"
                     }
                 ]
             }

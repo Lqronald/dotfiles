@@ -21,6 +21,7 @@ in with lib; {
       modifier = "SUPER";
     in concatStrings [ ''
       monitor=,3840x2160@120,auto,2
+
       windowrule = float, ^(steam)$
       windowrule = size 1080 900, ^(steam)$
       windowrule = center, ^(steam)$
@@ -34,9 +35,14 @@ in with lib; {
         resize_on_border = true
       }
 
+      $scratchy  = class:^(scratchpad)$
+      windowrulev2 = float,$scratchy
+      windowrulev2 = size 70% 60%,$scratchy
+      windowrulev2 = workspace special:scratch_term silent,$scratchy
+      windowrulev2 = center,$scratchy
+
       input {
         kb_layout = be
-        #kb_layout = ${theKBDLayout}, ${theSecondKBDLayout}
         kb_options = grp:alt_shift_toggle
         #kb_options=caps:super
         follow_mouse = 1
@@ -58,6 +64,8 @@ in with lib; {
       env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
       env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
       env = MOZ_ENABLE_WAYLAND, 1
+      env = GDK_DPI_SCALE, 0.5
+      env = GDK_SCALE, 2
       ${if cpuType == "vm" then ''
         env = WLR_NO_HARDWARE_CURSORS,1
         env = WLR_RENDERER_ALLOW_SOFTWARE,1
@@ -65,7 +73,6 @@ in with lib; {
       ''}
       ${if gpuType == "nvidia" then ''
         env = WLR_NO_HARDWARE_CURSORS,1
-        env = GDK_DPI_SCALE, 0.5
       '' else ''
       ''}
       gestures {
@@ -115,6 +122,7 @@ in with lib; {
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = swww init
       exec-once = waybar
+      exec-once = pypr
       exec-once = swaync
       exec-once = wallsetter
       exec-once = nm-applet --indicator
@@ -126,82 +134,84 @@ in with lib; {
       master {
         new_is_master = true
       }
-      bind = ${modifier},Return,exec,${terminal}
-      bind = ${modifier}SHIFT,Return,exec,rofi-launcher
-      bind = ${modifier}SHIFT,W,exec,web-search
-      bind = ${modifier}SHIFT,S,exec,swaync-client -rs
-      ${if browser == "google-chrome" then ''
-	bind = ${modifier},W,exec,google-chrome-stable
-      '' else ''
-	bind = ${modifier},W,exec,${browser}
-      ''}
-      bind = ${modifier},E,exec,emopicker9000
-      bind = ${modifier},S,exec,screenshootin
-      bind = ${modifier},D,exec,discord
-      bind = ${modifier},O,exec,obs
-      bind = ${modifier},G,exec,gimp
-      bind = ${modifier}SHIFT,G,exec,godot4
-      bind = ${modifier},T,exec,thunar
-      bind = ${modifier},M,exec,spotify
-      bind = ${modifier},Q,killactive,
-      bind = ${modifier},P,pseudo,
-      bind = ${modifier}SHIFT,I,togglesplit,
-      bind = ${modifier},F,fullscreen,
-      bind = ${modifier}SHIFT,F,togglefloating,
-      bind = ${modifier}SHIFT,C,exit,
-      bind = ${modifier}SHIFT,left,movewindow,l
-      bind = ${modifier}SHIFT,right,movewindow,r
-      bind = ${modifier}SHIFT,up,movewindow,u
-      bind = ${modifier}SHIFT,down,movewindow,d
-      bind = ${modifier}SHIFT,h,movewindow,l
-      bind = ${modifier}SHIFT,l,movewindow,r
-      bind = ${modifier}SHIFT,k,movewindow,u
-      bind = ${modifier}SHIFT,j,movewindow,d
-      bind = ${modifier},left,movefocus,l
-      bind = ${modifier},right,movefocus,r
-      bind = ${modifier},up,movefocus,u
-      bind = ${modifier},down,movefocus,d
-      bind = ${modifier},h,movefocus,l
-      bind = ${modifier},l,movefocus,r
-      bind = ${modifier},k,movefocus,u
-      bind = ${modifier},j,movefocus,d
-      bind = ${modifier},1,workspace,1
-      bind = ${modifier},2,workspace,2
-      bind = ${modifier},3,workspace,3
-      bind = ${modifier},4,workspace,4
-      bind = ${modifier},5,workspace,5
-      bind = ${modifier},6,workspace,6
-      bind = ${modifier},7,workspace,7
-      bind = ${modifier},8,workspace,8
-      bind = ${modifier},9,workspace,9
-      bind = ${modifier},0,workspace,10
-      bind = ${modifier}SHIFT,1,movetoworkspace,1
-      bind = ${modifier}SHIFT,2,movetoworkspace,2
-      bind = ${modifier}SHIFT,3,movetoworkspace,3
-      bind = ${modifier}SHIFT,4,movetoworkspace,4
-      bind = ${modifier}SHIFT,5,movetoworkspace,5
-      bind = ${modifier}SHIFT,6,movetoworkspace,6
-      bind = ${modifier}SHIFT,7,movetoworkspace,7
-      bind = ${modifier}SHIFT,8,movetoworkspace,8
-      bind = ${modifier}SHIFT,9,movetoworkspace,9
-      bind = ${modifier}SHIFT,0,movetoworkspace,10
-      bind = ${modifier}CONTROL,right,workspace,e+1
-      bind = ${modifier}CONTROL,left,workspace,e-1
-      bind = ${modifier},mouse_down,workspace, e+1
-      bind = ${modifier},mouse_up,workspace, e-1
-      bindm = ${modifier},mouse:272,movewindow
-      bindm = ${modifier},mouse:273,resizewindow
-      bind = ALT,Tab,cyclenext
-      bind = ALT,Tab,bringactivetotop
-      bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-      bind = ,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-      binde = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-      bind = ,XF86AudioPlay, exec, playerctl play-pause
-      bind = ,XF86AudioPause, exec, playerctl play-pause
-      bind = ,XF86AudioNext, exec, playerctl next
-      bind = ,XF86AudioPrev, exec, playerctl previous
-      bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
-      bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
+      bind = ${modifier}, Return, exec, ${terminal}
+      bind = ${modifier}, SUPER_L, exec, rofi-launcher
+      bind = ${modifier} SHIFT, W, exec, web-search
+      bind = ${modifier}, N, exec, swaync-client -rs
+        ${if browser == "google-chrome" then ''
+          bind = ${modifier}, W, exec, google-chrome-stable
+        '' else ''
+          bind = ${modifier}, W, exec, ${browser}
+        ''}
+      bind = , PRINT, exec, screenshootin
+      bind = ${modifier}, E, exec, emopicker9000
+      bind = ${modifier}, D, exec, dolphin
+      bind = ${modifier}, G, exec, gimp
+      bind = ${modifier}, T, exec, thunar
+      bind = ${modifier}, S, exec, spotify
+      bind = ${modifier}, P, pseudo,
+      bind = ${modifier}, Q, killactive,
+      bind = ${modifier}, R, exec, ~/.dotfiles/config/scripts/rofibeats.sh
+      bind = ${modifier} SHIFT, I, togglesplit,
+      bind = ${modifier}, F, fullscreen, 1
+      bind = ${modifier} SHIFT, F, fullscreen
+      bind = ${modifier} SHIFT, F, togglefloating,
+      bind = ${modifier}, L, exec, swaylock
+      bind = ${modifier} SHIFT, C, exit,
+
+      bind = ${modifier} CTRL, left, movewindow, l
+      bind = ${modifier} CTRL, right, movewindow, r
+      bind = ${modifier} CTRL, up, movewindow, u
+      bind = ${modifier} CTRL, down, movewindow, d
+      bind = ${modifier}, left, movefocus, l
+      bind = ${modifier}, right, movefocus, r
+      bind = ${modifier}, up, movefocus, u
+      bind = ${modifier}, down, movefocus, d
+      bind = ${modifier} SHIFT, right, resizeactive, 100 0
+      bind = ${modifier} SHIFT, left, resizeactive, -100 0
+      bind = ${modifier} SHIFT, up, resizeactive, 0 -100
+      bind = ${modifier} SHIFT, down, resizeactive, 0 100
+
+      bind = ${modifier}, ampersand, workspace, 1
+      bind = ${modifier}, eacute, workspace, 2
+      bind = ${modifier}, quotedbl, workspace, 3
+      bind = ${modifier}, apostrophe, workspace, 4
+      bind = ${modifier}, parenleft, workspace, 5
+      bind = ${modifier}, egrave, workspace, 6
+      bind = ${modifier}, minus, workspace, 7
+      bind = ${modifier}, underscore, workspace, 8
+      bind = ${modifier}, ccedilla, workspace, 9
+      bind = ${modifier}, agrave, workspace, 10
+      bind = ${modifier} SHIFT, ampersand, movetoworkspace, 1
+      bind = ${modifier} SHIFT, eacute, movetoworkspace, 2
+      bind = ${modifier} SHIFT, quotedbl, movetoworkspace, 3
+      bind = ${modifier} SHIFT, apostrophe, movetoworkspace, 4
+      bind = ${modifier} SHIFT, parenleft, movetoworkspace, 5
+      bind = ${modifier} SHIFT, egrave, movetoworkspace, 6
+      bind = ${modifier} SHIFT, minus, movetoworkspace, 7
+      bind = ${modifier} SHIFT, underscore, movetoworkspace, 8
+      bind = ${modifier} SHIFT, ccedilla, movetoworkspace, 9
+      bind = ${modifier} SHIFT, agrave, movetoworkspace, 10
+      #bind = ${modifier} CTRL, right, workspace, e+1
+      #bind = ${modifier} CTRL, left, workspace, e-1
+      bind = ${modifier}, mouse_down, workspace,  e+1
+      bind = ${modifier}, mouse_up, workspace,  e-1
+      bindm = ${modifier}, mouse:272, movewindow
+      bindm = ${modifier}, mouse:273, resizewindow
+
+      bind = ALT, Tab, cyclenext
+      bind = ALT, Tab, bringactivetotop
+      bind = , F12, exec, pypr toggle term && hyprctl dispatch bringactivetotop
+
+      bind = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+      bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      binde = , XF86AudioMute,  exec,  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bind = , XF86AudioPlay,  exec,  playerctl play-pause
+      bind = , XF86AudioPause,  exec,  playerctl play-pause
+      bind = , XF86AudioNext,  exec,  playerctl next
+      bind = , XF86AudioPrev,  exec,  playerctl previous
+      bind = , XF86MonBrightnessDown, exec, brightnessctl set 5%-
+      bind = , XF86MonBrightnessUp, exec, brightnessctl set +5%
     '' ];
   };
 }

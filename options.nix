@@ -14,7 +14,7 @@ in {
   hostname = "${hostname}";
   gitUsername = "Lqronald";
   gitEmail = "lqronald@gmail.com";
-  theme = "gigavolt";
+  theme = "equilibrium-dark";
   slickbar = if waybarStyle == "slickbar" then true else false;
   simplebar = if waybarStyle == "simplebar" then true else false;
   borderAnim = true;
@@ -29,7 +29,7 @@ in {
   terminal = "alacritty"; # This sets the terminal that is used by the hyprland terminal keybinding
 
   # System Settings
-  clock24h = false;
+  clock24h = true;
   theLocale = "en_GB.UTF-8";
   theKBDLayout = "be";
   theSecondKBDLayout = "de";

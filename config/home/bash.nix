@@ -38,6 +38,7 @@ lib.mkIf (theShell == "bash") {
       lt = "eza -a --tree --level=1 --icons --group-directories-first";
       "cd.." = "cd ..";
       df = "df -h";
+      reboot = "systemctl reboot";
       shutdown = "systemctl poweroff";
       dot = "cd ~/.dotfiles";
       hh = "Hyprland";
