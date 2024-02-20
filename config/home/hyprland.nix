@@ -22,6 +22,10 @@ in with lib; {
     in concatStrings [ ''
       monitor=,3840x2160@120,auto,2
 
+      #xwayland {
+      #  force_zero_scaling = true
+      #}
+
       windowrule = float, ^(steam)$
       windowrule = size 1080 900, ^(steam)$
       windowrule = center, ^(steam)$
@@ -34,6 +38,8 @@ in with lib; {
         layout = dwindle
         resize_on_border = true
       }
+
+      windowrule = float, ^(vlc)$
 
       $scratchy  = class:^(scratchpad)$
       windowrulev2 = float,$scratchy
@@ -64,7 +70,7 @@ in with lib; {
       env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
       env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
       env = MOZ_ENABLE_WAYLAND, 1
-      env = GDK_DPI_SCALE, 0.5
+      #env = GDK_DPI_SCALE, 0.5
       env = GDK_SCALE, 2
       ${if cpuType == "vm" then ''
         env = WLR_NO_HARDWARE_CURSORS,1

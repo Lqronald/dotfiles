@@ -1,18 +1,21 @@
 { pkgs, config, ... }:
 
-let inherit (import ../../options.nix) theKBDVariant
-theKBDLayout theSecondKBDLayout; in
+let inherit (import ../../options.nix) theKBDVariant theKBDLayout theSecondKBDLayout;
+in
 {
   services.xserver = {
     enable = true;
+    dpi = 192;
     xkb = {
       layout = "${theKBDLayout}";
       variant = "";
     };
     libinput.enable = true;
+
     displayManager.sddm = {
       enable = true;
       autoNumlock = true;
+      enableHidpi = true;
       wayland.enable = true;
       theme = "sugar-dark";
     };

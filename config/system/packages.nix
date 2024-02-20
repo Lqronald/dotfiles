@@ -33,6 +33,7 @@
     neofetch
     networkmanagerapplet
     noto-fonts-color-emoji
+    okular
     playerctl
     polkit_gnome
     ripgrep

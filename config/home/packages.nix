@@ -21,6 +21,8 @@ in {
     mpv
     neovide
     pavucontrol
+    protonup-qt
+    protontricks
     pyprland
     qimgv
     qbittorrent
