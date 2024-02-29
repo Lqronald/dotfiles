@@ -23,7 +23,7 @@ in {
 
   # Define Settings For Xresources
   xresources.properties = {
-    "Xcursor.size" = 24;
+    "Xcursor.size" = 32;
   };
 
   # Install & Configure Git
@@ -32,6 +32,9 @@ in {
     userName = "${gitUsername}";
     userEmail = "${gitEmail}";
   };
+
+  #programs.hypridle.enable = true;
+  #programs.hyprlock.enable = true;
 
   # Create XDG Dirs
   xdg = {

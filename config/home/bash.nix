@@ -24,11 +24,11 @@ lib.mkIf (theShell == "bash") {
       FLAKEPREV = "${flakePrev}";
     };
     shellAliases = {
+      v="nvim";
       sv="sudo nvim";
       reflake="sudo nixos-rebuild switch --flake ${flakeDir}";
       flakup="sudo nix flake update ${flakeDir}";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-      v="nvim";
       #ls="lsd";
       #ll="lsd -l";
       #la="lsd -a";
@@ -39,7 +39,9 @@ lib.mkIf (theShell == "bash") {
       "cd.." = "cd ..";
       df = "df -h";
       reboot = "systemctl reboot";
+      re = "systemctl reboot";
       shutdown = "systemctl poweroff";
+      sd = "systemctl poweroff";
       dot = "cd ~/.dotfiles";
       hh = "Hyprland";
     };

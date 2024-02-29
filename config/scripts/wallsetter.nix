@@ -13,7 +13,7 @@ pkgs.writeShellScriptBin "wallsetter" ''
     cd ${wallpaperDir}
     git pull
   else
-    ${pkgs.git}/bin/git clone ${wallpaperGit} ${wallpaperDir}
+    # ${pkgs.git}/bin/git clone ${wallpaperGit} ${wallpaperDir}
     chown -R ${username}:users ${wallpaperDir}
   fi
   while true;

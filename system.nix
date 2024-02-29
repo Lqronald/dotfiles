@@ -26,6 +26,9 @@ in {
   networking.hostName = "${hostname}"; # Define your hostname
   networking.networkmanager.enable = true;
 
+  # Make bash scripts network
+  services.envfs.enable = true;
+
   # Set your time zone
   time.timeZone = "${theTimezone}";
 
@@ -77,7 +80,7 @@ in {
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 14d";
+      options = "--delete-older-than 7d";
     };
   };
 

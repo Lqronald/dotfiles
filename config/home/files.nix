@@ -8,6 +8,8 @@
   home.file.".face.icon".source = ./files/face.jpg; # For SDDM
   home.file.".config/rofi/rofi.jpg".source = ./files/rofi.jpg;
   home.file.".config/starship.toml".source = ./files/starship.toml;
+  home.file.".config/hypr/hypridle.conf".source = ./files/hypridle.conf;
+  home.file.".config/hypr/hyprlock.conf".source = ./files/hyprlock.conf;
   home.file.".local/share/fonts" = {
     source = ./files/fonts;
     recursive = true;

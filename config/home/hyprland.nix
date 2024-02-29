@@ -26,6 +26,26 @@ in with lib; {
       #  force_zero_scaling = true
       #}
 
+      exec-once = $POLKIT_BIN
+      exec-once = dbus-update-activation-environment --systemd --all
+      exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+      exec-once = swww init
+      exec-once = waybar
+      exec-once = pypr
+      exec-once = swaync
+      #exec-once = wallsetter
+      exec-once = nm-applet --indicator
+      exec-once = swayidle -w timeout 1200 'swaylock -f' timeout 1260 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
+      #exec-once = hypridle
+
+      dwindle {
+        pseudotile = true
+        preserve_split = true
+      }
+      master {
+        new_is_master = true
+      }
+
       windowrule = float, ^(steam)$
       windowrule = size 1080 900, ^(steam)$
       windowrule = center, ^(steam)$
@@ -39,7 +59,7 @@ in with lib; {
         resize_on_border = true
       }
 
-      windowrule = float, ^(vlc)$
+      #windowrule = float, ^(vlc)$
 
       $scratchy  = class:^(scratchpad)$
       windowrulev2 = float,$scratchy
@@ -123,23 +143,7 @@ in with lib; {
           color = rgba(${theme.base0A}ff)
         }
       }
-      exec-once = $POLKIT_BIN
-      exec-once = dbus-update-activation-environment --systemd --all
-      exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      exec-once = swww init
-      exec-once = waybar
-      exec-once = pypr
-      exec-once = swaync
-      exec-once = wallsetter
-      exec-once = nm-applet --indicator
-      exec-once = swayidle -w timeout 720 'swaylock -f' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
-      dwindle {
-        pseudotile = true
-        preserve_split = true
-      }
-      master {
-        new_is_master = true
-      }
+
       bind = ${modifier}, Return, exec, ${terminal}
       bind = ${modifier}, SUPER_L, exec, rofi-launcher
       bind = ${modifier} SHIFT, W, exec, web-search
@@ -150,6 +154,8 @@ in with lib; {
           bind = ${modifier}, W, exec, ${browser}
         ''}
       bind = , PRINT, exec, screenshootin
+      bind = ${modifier}, B, exec, waypaper --random
+      bind = ${modifier}, C, exec, waypaper
       bind = ${modifier}, E, exec, emopicker9000
       bind = ${modifier}, D, exec, dolphin
       bind = ${modifier}, G, exec, gimp
@@ -158,12 +164,13 @@ in with lib; {
       bind = ${modifier}, P, pseudo,
       bind = ${modifier}, Q, killactive,
       bind = ${modifier}, R, exec, ~/.dotfiles/config/scripts/rofibeats.sh
+      bind = ${modifier} SHIFT, B, exec, ~/.dotfiles/config/scripts/launchwb.sh
       bind = ${modifier} SHIFT, I, togglesplit,
       bind = ${modifier}, F, fullscreen, 1
       bind = ${modifier} SHIFT, F, fullscreen
-      bind = ${modifier} SHIFT, F, togglefloating,
+      bind = ${modifier} SHIFT, T, togglefloating,
       bind = ${modifier}, L, exec, swaylock
-      bind = ${modifier} SHIFT, C, exit,
+      bind = ${modifier} SHIFT, M, exit,
 
       bind = ${modifier} CTRL, left, movewindow, l
       bind = ${modifier} CTRL, right, movewindow, r

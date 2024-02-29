@@ -21,6 +21,7 @@ in {
     mpv
     neovide
     pavucontrol
+    phinger-cursors
     protonup-qt
     protontricks
     pyprland
@@ -34,6 +35,7 @@ in {
     swaynotificationcenter
     swww
     vlc
+    waypaper
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # Import Scripts

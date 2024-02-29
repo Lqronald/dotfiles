@@ -19,6 +19,9 @@ in
       wayland.enable = true;
       theme = "sugar-dark";
     };
+
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = "ronald";
   };
 
   environment.systemPackages =

@@ -5,9 +5,11 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
-    size = 24;
+    #package = pkgs.bibata-cursors;
+    #name = "Bibata-Modern-Ice";
+    package = pkgs.phinger-cursors;
+    name = "phinger-cursors-light";
+    size = 32;
   };
 
   # Theme GTK
