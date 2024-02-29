@@ -10,10 +10,11 @@ in {
   imports =
     [
       inputs.nixvim.nixosModules.nixvim
-      ./hardware.nix
+      ./hardware-configuration.nix
       ./config/system
     ];
 
+  # Good for recovery
   boot.kernel.sysctl."kernel.sysrq" = 1;
 
   boot.plymouth.enable = true;
@@ -26,7 +27,7 @@ in {
   networking.hostName = "${hostname}"; # Define your hostname
   networking.networkmanager.enable = true;
 
-  # Make bash scripts network
+  # Make bash scripts work
   services.envfs.enable = true;
 
   # Set your time zone

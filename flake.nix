@@ -38,7 +38,7 @@
           inherit username; inherit hostname;
         };
 	modules = [ 
-	  ./system.nix
+	  ./configuration.nix
 	  impermanence.nixosModules.impermanence
       home-manager.nixosModules.home-manager {
 	    home-manager.extraSpecialArgs = {
