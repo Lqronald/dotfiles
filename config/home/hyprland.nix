@@ -50,8 +50,8 @@ in with lib; {
       windowrule = size 1080 900, ^(steam)$
       windowrule = center, ^(steam)$
       general {
-        gaps_in = 6
-        gaps_out = 8
+        gaps_in = 4
+        gaps_out = 4
         border_size = 2
         col.active_border = rgba(${theme.base0C}ff) rgba(${theme.base0D}ff) rgba(${theme.base0B}ff) rgba(${theme.base0E}ff) 45deg
         col.inactive_border = rgba(${theme.base00}cc) rgba(${theme.base01}cc) 45deg
@@ -59,7 +59,8 @@ in with lib; {
         resize_on_border = true
       }
 
-      #windowrule = float, ^(vlc)$
+      windowrule = float, ^(vlc)$
+      windowrule = workspace 2, ^(qBittorrent)$
 
       $scratchy  = class:^(scratchpad)$
       windowrulev2 = float,$scratchy

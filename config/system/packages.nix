@@ -53,7 +53,11 @@
   ];
 
   programs.steam.gamescopeSession.enable = true;
+
   programs.dconf.enable = true;
+
+  #services.xserver.desktopManager.plasma6.enable = true;
+
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;

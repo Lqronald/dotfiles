@@ -38,7 +38,7 @@ in {
       transparency: "real";
       orientation: vertical;
       border: 2px ;
-      border-color: #${palette.base0F};
+      border-color: #${palette.base0D};
       border-radius: 10px;
     }
 

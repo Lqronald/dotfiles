@@ -14,8 +14,8 @@
     source = ./files/fonts;
     recursive = true;
   };
-  home.file.".config/obs-studio" = {
-    source = ./files/obs-studio;
-    recursive = true;
-  };
+  #home.file.".config/obs-studio" = {
+  #  source = ./files/obs-studio;
+  #  recursive = true;
+  #};
 }

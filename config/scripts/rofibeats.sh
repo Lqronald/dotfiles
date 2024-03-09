@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # add more args here according to preference
-ARGS="--volume=60"
+ARGS="--volume=30"
 ARGS="--no-video"
 
 notification(){
