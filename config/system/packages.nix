@@ -18,6 +18,7 @@
     eza
     git
     gnome.gnome-disk-utility
+    helix
     htop
     killall
     libnotify
