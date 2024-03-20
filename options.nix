@@ -1,8 +1,9 @@
 # PLEASE READ THE WIKI FOR DETERMINING
-# VALUES FOR THIS PAGE. 
+# WHAT TO PUT HERE AS OPTIONS. 
 # https://gitlab.com/Zaney/zaneyos/-/wikis/Setting-Options
 
 let
+  # THINGS YOU NEED TO CHANGE
   username = "ronald";
   hostname = "hyprnix";
   userHome = "/home/${username}";
@@ -17,6 +18,7 @@ in {
   theme = "evenok-dark";
   slickbar = if waybarStyle == "slickbar" then true else false;
   simplebar = if waybarStyle == "simplebar" then true else false;
+  bar-number = true; # Enable / Disable Workspace Numbers In Waybar
   borderAnim = true;
   browser = "firefox";
   wallpaperGit = "https://github.com/Lqronald/Wallpapers.git"; # This will give you my wallpapers
@@ -38,10 +40,6 @@ in {
   theTimezone = "Europe/Brussels";
   theShell = "bash"; # Possible options: bash, zsh
   theKernel = "default"; # Possible options: default, latest, lqx, xanmod, zen
-  # This is for running NixOS
-  # On a tmpfs or root on RAM
-  # You Most Like Want This -> false
-  impermanence = false; # This should be set to false unless you know what your doing!
   sdl-videodriver = "wayland"; # Either x11 or wayland ONLY. Games might require x11 set here
   # For Hybrid Systems intel-nvidia
   # Should Be Used As gpuType
@@ -51,8 +49,8 @@ in {
   # Nvidia Hybrid Devices
   # ONLY NEEDED FOR HYBRID
   # SYSTEMS! 
-  #intel-bus-id = "PCI:0:2:0";
-  #nvidia-bus-id = "PCI:14:0:0";
+  # intel-bus-id = "PCI:1:0:0";
+  # nvidia-bus-id = "PCI:0:2:0";
 
   # Enable / Setup NFS
   nfs = false;

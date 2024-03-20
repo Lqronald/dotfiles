@@ -46,9 +46,11 @@ in with lib; {
         new_is_master = true
       }
 
-      windowrule = float, ^(steam)$
-      windowrule = size 1080 900, ^(steam)$
-      windowrule = center, ^(steam)$
+      #windowrule = float, ^(steam)$
+      #windowrule = size 1080 900, ^(steam)$
+      #windowrule = center, ^(steam)$
+      windowrule = fullscreen, ^(wlogout)$
+      windowrule = animation fade,^(wlogout)$
       general {
         gaps_in = 4
         gaps_out = 4

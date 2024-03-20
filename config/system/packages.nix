@@ -18,7 +18,6 @@
     eza
     git
     gnome.gnome-disk-utility
-    helix
     htop
     killall
     libnotify
@@ -53,7 +52,7 @@
     ydotool
   ];
 
-  programs.steam.gamescopeSession.enable = true;
+  #programs.steam.gamescopeSession.enable = true;
 
   programs.dconf.enable = true;
 

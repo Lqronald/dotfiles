@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, username, ... }:
 
 let inherit (import ../../options.nix) theKBDVariant theKBDLayout theSecondKBDLayout;
 in
@@ -21,7 +21,7 @@ in
     };
 
     displayManager.autoLogin.enable = true;
-    displayManager.autoLogin.user = "ronald";
+    displayManager.autoLogin.user = "${username}";
   };
 
   environment.systemPackages =

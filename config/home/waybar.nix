@@ -2,7 +2,8 @@
 
 let
   palette = config.colorScheme.palette;
-  inherit (import ../../options.nix) slickbar simplebar clock24h;
+  betterTransition = "all 0.3s cubic-bezier(.55,-0.68,.48,1.682)";
+  inherit (import ../../options.nix) slickbar bar-number simplebar clock24h;
 in with lib; {
   # Configure & Theme Waybar
   programs.waybar = {
@@ -12,15 +13,12 @@ in with lib; {
       layer = "top";
       position = "top";
 
-      modules-center = if simplebar == true then [ "hyprland/window" ] 
-      else [ "network" "pulseaudio" "cpu" "hyprland/workspaces" "memory" "disk" "clock" ];
-      modules-left = if simplebar == true then ["custom/startmenu" "hyprland/workspaces" "cpu" "memory" "network"  ]
-      else [ "custom/startmenu" "hyprland/window" ];
-      modules-right = if simplebar == true then [ "idle_inhibitor" "custom/themeselector" "custom/notification" "pulseaudio" "clock"  "tray" ]
-      else [ "idle_inhibitor" "custom/themeselector" "custom/wallpaperselector" "custom/notification" "battery" "tray" ];
+      modules-center = [ "hyprland/workspaces" ] ;
+      modules-left = [ "custom/startmenu" "hyprland/window" "pulseaudio" "cpu" "memory"];
+      modules-right = [ "custom/hyprbindings" "custom/exit" "idle_inhibitor" "custom/themeselector" "custom/wallpaperselector" "custom/notification" "battery" "clock"  "tray" ];
 
       "hyprland/workspaces" = {
-      	format = if simplebar == true then "{name}" else "{icon}";
+      	format = if bar-number == true then "{name}" else "{icon}";
       	format-icons = {
           default = " ";
           active = " ";
@@ -37,7 +35,8 @@ in with lib; {
       };
       "hyprland/window" = {
       	max-length = 25;
-      	separate-outputs = false;
+        separate-outputs = false;
+        rewrite = { "" = " 🙈 No Windows? "; };
       };
       "memory" = {
       	interval = 5;
@@ -79,12 +78,11 @@ in with lib; {
           car = "";
           default = ["" "" ""];
         };
-        on-click = "pavucontrol";
+        on-click = "sleep 0.1 && pavucontrol";
       };
       "custom/themeselector" = {
         tooltip = false;
         format = "";
-        # exec = "theme-selector";
         on-click = "sleep 0.1 && theme-selector";
       };
       "custom/wallpaperselector" = {
@@ -93,17 +91,27 @@ in with lib; {
         # exec = "theme-selector";
         on-click = "sleep 0.1 && waypaper";
       };
+      "custom/exit" = {
+        tooltip = false;
+        format = "";
+        on-click = "sleep 0.1 && wlogout";
+      };
       "custom/startmenu" = {
         tooltip = false;
         format = " ";
         # exec = "rofi -show drun";
-        on-click = "rofi-launcher";
+        on-click = "sleep 0.1 && rofi-launcher";
+      };
+      "custom/hyprbindings" = {
+        tooltip = false;
+        format = " Bindings";
+        #aon-click = "sleep 0.1 && list-hypr-bindings";
       };
       "idle_inhibitor" = {
         format = "{icon}";
         format-icons = {
-            activated = " ";
-            deactivated = " ";
+            activated = "";
+            deactivated = "";
         };
         tooltip = "true";
       };
@@ -123,7 +131,7 @@ in with lib; {
         return-type = "json";
         exec-if = "which swaync-client";
         exec = "swaync-client -swb";
-        on-click = "task-waybar";
+        on-click = "sleep 0.1 && task-waybar";
         escape = true;
       };
       "battery" = {
@@ -146,16 +154,11 @@ in with lib; {
     	font-weight: bold;
       }
       window#waybar {
-	${if slickbar == true then ''
+	${if slickbar == true || simplebar == true then ''
 	  background-color: rgba(26,27,38,0);
 	  border-bottom: 1px solid rgba(26,27,38,0);
 	  border-radius: 0px;
 	  color: #${palette.base0F};
-	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-	  background-color: #${palette.base00};
-	  border-radius: 0px;
-	  border-bottom: 1px solid rgba(26,27,38,0);
 	'' else ''
 	  background-color: #${palette.base00};
 	  border-bottom: 1px solid #${palette.base00};
@@ -165,7 +168,7 @@ in with lib; {
       }
       #workspaces {
 	${if slickbar == true then ''
-	  background: linear-gradient(180deg, #${palette.base00}, #${palette.base01});
+	  background: #${palette.base00};
 	  margin: 5px;
 	  padding: 0px 1px;
 	  border-radius: 15px;
@@ -173,13 +176,14 @@ in with lib; {
 	  font-style: normal;
 	  color: #${palette.base00};
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
+	  color: #${palette.base00};
           background: transparent;   
+	  margin: 4px;
 	  border-radius: 0px;
 	  border: 0px;
 	  font-style: normal;
 	'' else ''
-	  background: linear-gradient(45deg, #${palette.base01}, #${palette.base01});
+	  background: #${palette.base01};
 	  margin: 4px;
 	  padding: 0px 1px;
 	  border-radius: 10px;
@@ -195,24 +199,28 @@ in with lib; {
 	  border-radius: 15px;
 	  border: 0px;
 	  color: #${palette.base00};
-	  background: linear-gradient(45deg, #${palette.base0D}, #${palette.base0E});
+	  background: linear-gradient(45deg, #${palette.base0C}, #${palette.base0D}, #${palette.base0E});
 	  opacity: 0.5;
-	  transition: all 0.3s ease-in-out;
+	  transition: ${betterTransition};
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  opacity: 0.3;
+	  color: #${palette.base03};
+          background: #${palette.base00};   
+	  margin: 4px 3px;
+	  opacity: 1;
 	  border: 0px;
-	  transition: all 0.3s ease-in-out;
+	  border-radius: 15px;
+	  transition: ${betterTransition};
 	'' else ''
 	  padding: 0px 5px;
 	  margin: 4px 3px;
 	  border-radius: 10px;
 	  border: 0px;
 	  color: #${palette.base00};
-	  background: linear-gradient(45deg, #${palette.base06}, #${palette.base0E});
+          background: linear-gradient(45deg, #${palette.base0E}, #${palette.base0F}, #${palette.base0D}, #${palette.base09});
+          background-size: 300% 300%;
+          animation: gradient_horizontal 15s ease infinite;
 	  opacity: 0.5;
-	  transition: all 0.3s ease-in-out;
+          transition: ${betterTransition};
 	''}
       }
       #workspaces button.active {
@@ -225,23 +233,30 @@ in with lib; {
 	  background: linear-gradient(45deg, #${palette.base0D}, #${palette.base0E});
 	  opacity: 1.0;
 	  min-width: 40px;
-	  transition: all 0.3s ease-in-out;
+	  transition: ${betterTransition};
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
+	  color: #${palette.base00};
+          background: linear-gradient(118deg, #${palette.base0D} 5%, #${palette.base0F} 5%, #${palette.base0F} 20%, #${palette.base0D} 20%, #${palette.base0D} 40%, #${palette.base0F} 40%, #${palette.base0F} 60%, #${palette.base0D} 60%, #${palette.base0D} 80%, #${palette.base0F} 80%, #${palette.base0F} 95%, #${palette.base0D} 95%);   
+          background-size: 300% 300%;
+          animation: swiping 15s linear infinite;
+	  border-radius: 15px;
+	  margin: 4px 3px;
 	  opacity: 1.0;
 	  border: 0px;
-	  transition: all 0.3s ease-in-out;
+	  min-width: 45px;
+	  transition: ${betterTransition};
 	'' else ''
 	  padding: 0px 5px;
 	  margin: 4px 3px;
 	  border-radius: 10px;
 	  border: 0px;
 	  color: #${palette.base00};
-	  background: linear-gradient(45deg, #${palette.base06}, #${palette.base0E});
+          background: linear-gradient(45deg, #${palette.base0E}, #${palette.base0F}, #${palette.base0D}, #${palette.base09});
+          background-size: 300% 300%;
+          animation: gradient_horizontal 15s ease infinite;
+          transition: ${betterTransition};
 	  opacity: 1.0;
 	  min-width: 40px;
-	  transition: all 0.3s ease-in-out;
 	''}
       }
       #workspaces button:hover {
@@ -250,18 +265,40 @@ in with lib; {
 	  color: #${palette.base00};
 	  background: linear-gradient(45deg, #${palette.base0D}, #${palette.base0E});
 	  opacity: 0.8;
+	  transition: ${betterTransition};
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  opacity: 0.8;
+	  color: #${palette.base05};
 	  border: 0px;
-	  transition: all 0.3s ease-in-out;
+	  border-radius: 15px;
+	  transition: ${betterTransition};
 	'' else ''
 	  border-radius: 10px;
 	  color: #${palette.base00};
-	  background: linear-gradient(45deg, #${palette.base06}, #${palette.base0E});
+          background: linear-gradient(45deg, #${palette.base0E}, #${palette.base0F}, #${palette.base0D}, #${palette.base09});
+          background-size: 300% 300%;
+          animation: gradient_horizontal 15s ease infinite;
 	  opacity: 0.8;
+          transition: ${betterTransition};
 	''}
+      }
+      @keyframes gradient_horizontal {
+	0% {
+	  background-position: 0% 50%;
+	}
+	50% {
+	  background-position: 100% 50%;
+	}
+	100% {
+	  background-position: 0% 50%;
+	}
+      }
+      @keyframes swiping {
+        0% {
+	  background-position: 0% 200%;
+	}
+	100% {
+	  background-position: 200% 200%;
+	}
       }
       tooltip {
 	background: #${palette.base00};
@@ -279,9 +316,11 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  color: #${palette.base03};
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  border-radius: 15px;
+	  padding: 0px 10px;
 	'' else ''
 	  margin: 4px;
 	  padding: 2px 10px;
@@ -294,13 +333,14 @@ in with lib; {
    	color: #${palette.base0F};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 15px 50px 15px 50px;
+	  border-radius: 50px 15px 50px 15px;
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -316,27 +356,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
-	'' else ''
-	  background: #${palette.base01};
-	  margin: 4px;
-	  padding: 2px 10px;
-	  border-radius: 10px;
-	''}
-      }
-      #idle_inhibitor {
-    	color: #${palette.base0A};
-	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 50px 15px 50px 15px;
-	  margin: 5px;
-	  padding: 2px 20px;
-	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -352,9 +375,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -370,9 +394,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -388,9 +413,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -406,9 +432,29 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
+	'' else ''
+	  background: #${palette.base01};
 	  margin: 4px;
+	  padding: 2px 10px;
+	  border-radius: 10px;
+	''}
+      }
+      #custom-hyprbindings {
+    	color: #${palette.base0E};
+	${if slickbar == true then ''
+	  background: #${palette.base00};
+	  border-radius: 15px 50px 15px 50px;
+	  margin: 5px;
+	  padding: 2px 20px;
+	'' else if simplebar == true then ''
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -424,9 +470,10 @@ in with lib; {
 	  margin: 5px 0px 5px 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -442,9 +489,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -460,9 +508,10 @@ in with lib; {
 	  margin: 5px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -474,18 +523,19 @@ in with lib; {
     	color: #${palette.base0D};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 15px 50px 15px 50px;
-	  margin: 5px;
-	  padding: 2px 20px;
+	  border-radius: 0px 50px 15px 0px;
+	  margin: 5px 0px;
+	  padding: 2px 15px 2px 5px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px 6px 0px;
+	  padding: 0px 10px 0px 5px;
+	  border-radius: 0px 15px 15px 0px;
 	'' else ''
 	  background: #${palette.base01};
-	  margin: 4px;
-	  padding: 2px 10px;
-	  border-radius: 10px;
+	  margin: 4px 0px;
+	  padding: 2px 10px 2px 5px;
+	  border-radius: 0px 10px 10px 0px;
 	''}
       }
       #custom-wallpaperselector {
@@ -501,9 +551,9 @@ in with lib; {
 	  margin: 4px;
 	'' else ''
 	  background: #${palette.base01};
-	  margin: 4px;
-	  padding: 2px 10px;
-	  border-radius: 10px;
+	  margin: 4px 0px;
+	  padding: 2px 10px 2px 5px;
+	  border-radius: 0px 10px 10px 0px;
 	''}
       }
       #custom-startmenu {
@@ -514,9 +564,10 @@ in with lib; {
 	  margin: 5px 5px 5px 0px;
 	  padding: 2px 20px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 8px 0px 10px;
+	  border-radius: 15px;
 	'' else ''
 	  background: #${palette.base01};
 	  margin: 4px;
@@ -528,19 +579,39 @@ in with lib; {
     	color: #${palette.base09};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 15px 50px 15px 50px;
-	  margin: 5px;
-	  padding: 2px 20px;
+	  border-radius: 0px;
+	  margin: 5px 0px;
+	  padding: 2px 14px;
 	'' else if simplebar == true then ''
-	  color: #${config.colorScheme.colors.base05};
-          background: transparent;   
-	  margin: 4px;
+	  background: #${palette.base00};
+	  margin: 6px 0px;
+	  padding: 0px 14px;
+	  border-radius: 0px;
 	'' else ''
 	  background: #${palette.base01};
-	  margin: 4px;
-	  padding: 2px 10px;
-	  border-radius: 10px;
+	  margin: 4px 0px;
+	  padding: 2px 14px;
+	  border-radius: 0px;
 	''}
+      }
+      #custom-exit {
+    	color: #${palette.base0E};
+	${if slickbar == true then ''
+	  background: #${palette.base00};
+	  border-radius: 15px 0px 0px 50px;
+	  margin: 5px 0px;
+	  padding: 2px 5px 2px 15px;
+	'' else if simplebar == true then ''
+	  background: #${palette.base00};
+	  margin: 6px 0px 6px 4px;
+	  padding: 0px 5px 0px 10px;
+	  border-radius: 15px 0px 0px 15px;
+	'' else ''
+	  background: #${palette.base01};
+	  margin: 4px 0px;
+	  padding: 2px 5px 2px 10px;
+	  border-radius: 10px 0px 0px 10px;
+        ''}
       } ''
     ];
   };

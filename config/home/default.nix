@@ -18,6 +18,7 @@
     ./swaylock.nix
     ./swaync.nix
     ./wezterm.nix
+    ./wlogout.nix
     ./zsh.nix
 
     # Place Home Files Like Pictures

@@ -9,6 +9,6 @@
   };
 
   #environment.sessionVariables = {
-  #  STEAM_FORCE_DESKTOPUI_SCALING = "2";
+  #  STEAM_FORCE_DESKTOPUI_SCALING = "1";
   #};
 }
