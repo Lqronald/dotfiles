@@ -48,6 +48,7 @@
     wineWowPackages.stable
     wineWowPackages.staging
     winetricks
+    wireplumber
     wl-clipboard
     ydotool
   ];

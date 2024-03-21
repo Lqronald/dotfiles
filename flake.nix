@@ -33,24 +33,23 @@
   in {
     nixosConfigurations = {
       "${hostname}" = nixpkgs.lib.nixosSystem {
-	specialArgs = { 
-          inherit system; inherit inputs; 
-          inherit username; inherit hostname;
-        };
-	modules = [ 
-	  ./configuration.nix
-	  impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager {
-	    home-manager.extraSpecialArgs = {
-	      inherit username; inherit inputs;
-              inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+        specialArgs = {
+              inherit system; inherit inputs;
+              inherit username; inherit hostname;
             };
-	    home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-	    home-manager.users.${username} = import ./home.nix;
-	  }
-	];
+        modules = [
+          ./configuration.nix
+          impermanence.nixosModules.impermanence
+          home-manager.nixosModules.home-manager {
+          home-manager.extraSpecialArgs = {
+            inherit username; inherit inputs;
+                inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+            };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.users.${username} = import ./home.nix;}
+        ];
       };
     };
   };

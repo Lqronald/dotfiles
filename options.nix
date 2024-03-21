@@ -80,6 +80,6 @@ in {
   kitty = false;
 
   # Enable Python & PyCharm
-  python = false;
+  python = true;
 
 }
