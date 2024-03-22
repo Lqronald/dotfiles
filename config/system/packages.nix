@@ -43,7 +43,7 @@
     unrar
     unzip
     virt-viewer
-    #v4l-utils
+    v4l-utils
     wget
     wineWowPackages.stable
     wineWowPackages.staging
