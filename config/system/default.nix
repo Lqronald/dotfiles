@@ -14,12 +14,9 @@
     ./intel-nvidia.nix
     ./kernel.nix
     ./logitech.nix
-    #./neovim.nix
-    ./nfs.nix
     ./ntp.nix
     ./nvidia.nix
     ./packages.nix
-    #./persistence.nix
     ./polkit.nix
     ./python.nix
     ./printer.nix

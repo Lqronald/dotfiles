@@ -9,7 +9,7 @@ in {
     ignore-empty-password
     indicator-thickness=15
     indicator-radius=150
-    image=/home/ronald/Pictures/Wallpapers/beach_waves.jpg
+    image=/home/ronald/Pictures/Wallpapers/escape_velocity.jpg
     ring-color=${palette.base0D}
     key-hl-color=${palette.base0F}
     line-color=00000000

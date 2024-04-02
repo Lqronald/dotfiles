@@ -100,7 +100,7 @@ in {
                     },
                     {
                         "label": "",
-                        "command": "thunar"
+                        "command": "dolphin"
                     }
                 ]
             }

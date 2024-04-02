@@ -3,8 +3,7 @@
 let 
   inherit (import ./options.nix)
     gitUsername gitEmail theme browser 
-    wallpaperDir wallpaperGit flakeDir 
-    waybarStyle;
+    wallpaperDir flakeDir waybarStyle;
 in {
   # Home Manager Settings
   home.username = "${username}";
@@ -32,9 +31,6 @@ in {
     userName = "${gitUsername}";
     userEmail = "${gitEmail}";
   };
-
-  #programs.hypridle.enable = true;
-  #programs.hyprlock.enable = true;
 
   # Create XDG Dirs
   xdg = {

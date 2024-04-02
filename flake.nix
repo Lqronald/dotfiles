@@ -13,14 +13,9 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, impermanence, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
   let
     system = "x86_64-linux";
     inherit (import ./options.nix) username hostname;
@@ -40,7 +35,6 @@
             };
         modules = [
           ./configuration.nix
-          impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager {
           home-manager.extraSpecialArgs = {
             inherit username; inherit inputs;

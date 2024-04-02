@@ -7,7 +7,6 @@
     ./bash.nix
     ./gtk-qt.nix
     ./hyprland.nix
-    #./kdenlive.nix
     ./kitty.nix
     ./neofetch.nix
     ./packages.nix

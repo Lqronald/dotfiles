@@ -24,8 +24,7 @@ lib.mkIf (theShell == "bash") {
       FLAKEPREV = "${flakePrev}";
     };
     shellAliases = {
-      v="nvim";
-      sv="sudo nvim";
+      rebuild="sudo nixos-rebuild switch";
       reflake="sudo nixos-rebuild switch --flake ${flakeDir}";
       flakup="sudo nix flake update ${flakeDir}";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";

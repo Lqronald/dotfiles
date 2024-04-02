@@ -1,6 +1,3 @@
-# PLEASE READ THE WIKI FOR DETERMINING
-# WHAT TO PUT HERE AS OPTIONS. 
-# https://gitlab.com/Zaney/zaneyos/-/wikis/Setting-Options
 
 let
   # THINGS YOU NEED TO CHANGE
@@ -21,7 +18,7 @@ in {
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
   borderAnim = true;
   browser = "firefox";
-  wallpaperGit = "https://github.com/Lqronald/Wallpapers.git"; # This will give you my wallpapers
+  #wallpaperGit = "https://github.com/Lqronald/Wallpapers.git"; # This will give you my wallpapers
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Pictures/Wallpapers";
   screenshotDir = "${userHome}/Pictures/Screenshots";
@@ -65,7 +62,7 @@ in {
   printer = false;
 
   # Enable Flatpak & Larger Programs
-  flatpak = false;
+  flatpak = true;
   kdenlive = false;
   blender = false;
 

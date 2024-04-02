@@ -14,8 +14,8 @@ in with lib; {
       position = "top";
 
       modules-center = [ "hyprland/workspaces" ] ;
-      modules-left = [ "custom/startmenu" "hyprland/window" "pulseaudio" "cpu" "memory"];
-      modules-right = [ "custom/hyprbindings" "custom/exit" "idle_inhibitor" "custom/themeselector" "custom/wallpaperselector" "custom/notification" "battery" "clock"  "tray" ];
+      modules-left = [ "custom/startmenu" "hyprland/window" "memory" "cpu" "pulseaudio"];
+      modules-right = [ "custom/exit" "idle_inhibitor" "custom/themeselector" "custom/wallpaperselector" "custom/notification" "tray" ];
 
       "hyprland/workspaces" = {
       	format = if bar-number == true then "{name}" else "{icon}";

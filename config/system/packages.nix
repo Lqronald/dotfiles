@@ -38,7 +38,6 @@
     polkit_gnome
     ripgrep
     swappy
-    #symbola
     toybox
     unrar
     unzip
@@ -53,11 +52,7 @@
     ydotool
   ];
 
-  #programs.steam.gamescopeSession.enable = true;
-
   programs.dconf.enable = true;
-
-  #services.xserver.desktopManager.plasma6.enable = true;
 
   programs.hyprland = {
     enable = true;

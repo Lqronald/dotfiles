@@ -4,12 +4,11 @@
 let 
   inherit (import ./options.nix) 
     theLocale theTimezone gitUsername
-    theShell wallpaperDir wallpaperGit
+    theShell wallpaperDir
     theLCVariables theKBDLayout;
 in {
   imports =
     [
-      inputs.nixvim.nixosModules.nixvim
       ./hardware-configuration.nix
       ./config/system
     ];
@@ -53,10 +52,8 @@ in {
   users = {
     mutableUsers = true;
     users."${username}" = {
-      homeMode = "755";
-      hashedPassword = "$6$YdPBODxytqUWXCYL$AHW1U9C6Qqkf6PZJI54jxFcPVm2sm/XWq3Z1qa94PFYz0FF.za9gl5WZL/z/g4nFLQ94SSEzMg5GMzMjJ6Vd7.";
       isNormalUser = true;
-      description = "${gitUsername}";
+      description = "${username}";
       extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
@@ -69,21 +66,21 @@ in {
   };
 
   # Optimization settings and garbage collection automation
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = [
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
+  #nix = {
+  #  settings = {
+  #    auto-optimise-store = true;
+  #    experimental-features = [ "nix-command" "flakes" ];
+  #    substituters = ["https://hyprland.cachix.org"];
+  #    trusted-public-keys = [
+  #      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+  #    ];
+  #  };
+  #  gc = {
+  #    automatic = true;
+  #    dates = "weekly";
+  #    options = "--delete-older-than 7d";
+  #  };
+  #};
 
   system.stateVersion = "23.11";
 }

@@ -33,7 +33,6 @@ in with lib; {
       exec-once = waybar
       exec-once = pypr
       exec-once = swaync
-      #exec-once = wallsetter
       exec-once = nm-applet --indicator
       exec-once = swayidle -w timeout 1200 'swaylock -f' timeout 1260 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
       #exec-once = hypridle
@@ -162,7 +161,6 @@ in with lib; {
       bind = ${modifier}, E, exec, emopicker9000
       bind = ${modifier}, D, exec, dolphin
       bind = ${modifier}, G, exec, gimp
-      bind = ${modifier}, T, exec, thunar
       bind = ${modifier}, S, exec, spotify
       bind = ${modifier}, P, pseudo,
       bind = ${modifier}, Q, killactive,
