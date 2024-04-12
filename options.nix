@@ -72,7 +72,7 @@ in {
 
   # Enable Terminals
   # If You Disable All You Get Kitty
-  wezterm = false;
+  wezterm = true;
   alacritty = true;
   kitty = false;
 

@@ -22,6 +22,7 @@
     killall
     libnotify
     libreoffice
+    libsForQt5.ark
     libvirt
     lm_sensors
     lolcat
@@ -37,6 +38,7 @@
     playerctl
     polkit_gnome
     ripgrep
+    rustdesk
     swappy
     toybox
     unrar

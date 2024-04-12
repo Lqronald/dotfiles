@@ -15,7 +15,7 @@ in with lib; {
 
       modules-center = [ "hyprland/workspaces" "clock"] ;
       modules-left = [ "custom/startmenu" "hyprland/window" "memory" "cpu" "pulseaudio"];
-      modules-right = [ "custom/wallpaperselector" "custom/themeselector" "idle_inhibitor" "custom/notification" "custom/exit" "tray" ];
+      modules-right = [ "custom/exit" "idle_inhibitor" "custom/themeselector" "custom/wallpaperselector" "custom/notification" "tray" ];
 
       "hyprland/workspaces" = {
       	format = if bar-number == true then "{name}" else "{icon}";
@@ -46,7 +46,7 @@ in with lib; {
       };
       "cpu" = {
       	interval = 5;
-      	format = "{usage:2}%";
+      	format = " {usage:2}%";
         tooltip = true;
       };
       "disk" = {
@@ -334,9 +334,9 @@ in with lib; {
    	color: #${palette.base0F};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 50px 0px 0px 15px;
-	  margin: 5px 0px 5px 10px;
-	  padding: 2px 10px 2px 20px;
+	  border-radius: 50px 15px 50px 15px;
+	  margin: 5px;
+	  padding: 2px 20px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 4px;
@@ -355,7 +355,7 @@ in with lib; {
 	  background: #${palette.base00};
 	  border-radius: 45px 45px 45px 45px;
 	  margin: 5px;
-	  padding: 2px 15px;
+	  padding: 2px 20px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 4px;
@@ -372,9 +372,9 @@ in with lib; {
     	color: #${palette.base0A};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 0px 15px 50px 0px;
-	  margin: 5px 10px 5px 0px;
-	  padding: 2px 20px 2px 10px;
+	  border-radius: 50px 15px 50px 15px;
+	  margin: 5px;
+	  padding: 0px 20px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 4px;
@@ -505,9 +505,9 @@ in with lib; {
     	color: #${palette.base0C};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 0px 0px 0px 0px;
-	  margin: 5px 0px 5px 0px;
-	  padding: 2px 10px 2px 10px;
+	  border-radius: 15px 50px 15px 50px;
+	  margin: 5px;
+	  padding: 2px 20px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 4px;
@@ -525,8 +525,8 @@ in with lib; {
 	${if slickbar == true then ''
 	  background: #${palette.base00};
 	  border-radius: 0px 50px 15px 0px;
-	  margin: 5px 5px 5px 0px;
-	  padding: 2px 20px 2px 15px;
+	  margin: 5px 0px;
+	  padding: 2px 15px 2px 5px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 4px 6px 0px;
@@ -543,9 +543,9 @@ in with lib; {
     	color: #${palette.base0A};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 15px 0px 0px 50px;
-	  margin: 5px 0px 5px 10px;
-	  padding: 2px 10px 2px 20px;
+	  border-radius: 15px 50px 15px 50px;
+	  margin: 5px;
+	  padding: 2px 20px;
 	'' else if simplebar == true then ''
 	  color: #${config.colorScheme.colors.base05};
           background: transparent;
@@ -580,9 +580,9 @@ in with lib; {
     	color: #${palette.base09};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 15px 0px 0px 50px;
-	  margin: 5px 0px 5px 10px;
-	  padding: 2px 15px 2px 20px;
+	  border-radius: 0px;
+	  margin: 5px 0px;
+	  padding: 2px 14px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 0px;
@@ -599,9 +599,9 @@ in with lib; {
     	color: #${palette.base0E};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
-	  border-radius: 0px 50px 15px 0px;
-	  margin: 5px 10px 5px 0px;
-	  padding: 2px 20px 2px 10px;
+	  border-radius: 15px 0px 0px 50px;
+	  margin: 5px 0px;
+	  padding: 2px 5px 2px 15px;
 	'' else if simplebar == true then ''
 	  background: #${palette.base00};
 	  margin: 6px 0px 6px 4px;
