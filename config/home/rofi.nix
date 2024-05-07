@@ -37,7 +37,7 @@ in {
       width: 45%;
       transparency: "real";
       orientation: vertical;
-      border: 1px ;
+      border: 2px ;
       border-color: #${palette.base0D};
       border-radius: 10px;
     }
