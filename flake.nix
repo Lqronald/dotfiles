@@ -3,47 +3,55 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-colors.url = "github:misterio77/nix-colors";
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland-plugins = {
+    #  url = "github:hyprwm/hyprland-plugins";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, nixos-cosmic, ... }@inputs:
   let
     system = "x86_64-linux";
-    inherit (import ./options.nix) username hostname;
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-	    allowUnfree = true;
-      };
-    };
+    host = default;
+    username = "ronald";
   in {
     nixosConfigurations = {
-      "${hostname}" = nixpkgs.lib.nixosSystem {
+      "${host}" = nixpkgs.lib.nixosSystem {
         specialArgs = {
-              inherit system; inherit inputs;
-              inherit username; inherit hostname;
+              inherit system;
+              inherit inputs;
+              inherit username;
+              inherit host;
             };
         modules = [
-          ./configuration.nix
+          { nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
+          }
+          nixos-cosmic.nixosModules.default
+          ./hosts/${host}/config.nix
           home-manager.nixosModules.home-manager {
           home-manager.extraSpecialArgs = {
-            inherit username; inherit inputs;
-                inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
-            };
+            inherit username;
+            inherit inputs;
+            inherit host;
+          };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.${username} = import ./home.nix;}
+          home-manager.users.${username} = import ./hosts/${host}/home.nix;
+          }
         ];
       };
     };

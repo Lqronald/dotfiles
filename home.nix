@@ -8,7 +8,7 @@ in {
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # Set The Colorscheme
   colorScheme = inputs.nix-colors.colorSchemes."${theme}";
@@ -16,14 +16,9 @@ in {
   # Import Program Configurations
   imports = [
     inputs.nix-colors.homeManagerModules.default
-    inputs.hyprland.homeManagerModules.default
+  #  inputs.hyprland.homeManagerModules.default
     ./config/home
   ];
-
-  # Define Settings For Xresources
-  xresources.properties = {
-    "Xcursor.size" = 32;
-  };
 
   # Install & Configure Git
   programs.git = {
@@ -33,12 +28,12 @@ in {
   };
 
   # Create XDG Dirs
-  xdg = {
-    userDirs = {
-        enable = true;
-        createDirectories = true;
-    };
-  };
+  #xdg = {
+  #  userDirs = {
+  #      enable = true;
+  #      createDirectories = true;
+  #  };
+  #};
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
