@@ -35,9 +35,11 @@ in
       # accessible via `nvidia-settings`.
       nvidiaSettings = true;
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      #package = config.boot.kernelPackages.nvidiaPackages.stable;
+      #package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
   # For cosmic phantom screen
-  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
+  #boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
 }

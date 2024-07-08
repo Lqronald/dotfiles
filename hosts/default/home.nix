@@ -15,7 +15,7 @@ in
 
   # Import Program Configurations
   imports = [
-    ../../config/emoji.nix
+    #../../config/emoji.nix
     #../../config/hyprland.nix
     #../../config/neovim.nix
     #../../config/rofi/rofi.nix
@@ -27,10 +27,10 @@ in
   ];
 
   # Place Files Inside Home Directory
-  home.file."Pictures/Wallpapers" = {
-    source = ../../config/wallpapers;
-    recursive = true;
-  };
+  #home.file."Pictures/Wallpapers" = {
+  #  source = ../../config/wallpapers;
+  #  recursive = true;
+  #};
   home.file.".config/neofetch/config.conf".text = ''
         print_info() {
             info "$(color 6)  OS " distro
@@ -78,10 +78,6 @@ in
     };
   };
 
-  # Styling Options
-  stylix.targets.waybar.enable = false;
-  stylix.targets.rofi.enable = false;
-  stylix.targets.hyprland.enable = false;
   gtk = {
     iconTheme = {
       name = "Papirus-Dark";
@@ -103,15 +99,15 @@ in
 
   # Scripts
   home.packages = [
-    (import ../../scripts/emopicker9000.nix { inherit pkgs; })
+   # (import ../../scripts/emopicker9000.nix { inherit pkgs; })
    # (import ../../scripts/task-waybar.nix { inherit pkgs; })
-    (import ../../scripts/squirtle.nix { inherit pkgs; })
-    (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
+   # (import ../../scripts/squirtle.nix { inherit pkgs; })
+   # (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
    # (import ../../scripts/wallsetter.nix {
    #   inherit pkgs;
    #   inherit username;
    # })
-    (import ../../scripts/web-search.nix { inherit pkgs; })
+   # (import ../../scripts/web-search.nix { inherit pkgs; })
    # (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
    # (import ../../scripts/screenshootin.nix { inherit pkgs; })
    # (import ../../scripts/list-hypr-bindings.nix {
@@ -151,12 +147,12 @@ in
 	    bold.family = "JetBrainsMono Nerd Font";
 	    italic.family = "JetBrainsMono Nerd Font";
 	    bold_italic.family = "JetBrainsMono Nerd Font";
-	    size = 13;
+	    size = 14;
       };
     };
   };
     };
-    bash = {
+    programs.bash = {
       enable = true;
       enableCompletion = true;
     #  profileExtra = ''
@@ -172,7 +168,7 @@ in
       '';
       shellAliases = {
       rebuild="sudo nixos-rebuild switch";
-      fu="sudo nix flake update ${flakeDir}";
+      fu="sudo nix flake update /home/${username}/.dotfiles";
       fr="sudo nixos-rebuild switch --flake .";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       #ls="lsd";
@@ -192,6 +188,5 @@ in
       dot = "cd ~/.dotfiles";
       };
     };
-    home-manager.enable = true;
-  };
+    programs.home-manager.enable = true;
 }

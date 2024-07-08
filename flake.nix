@@ -6,7 +6,7 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nix-colors.url = "github:misterio77/nix-colors";
+    #nix-colors.url = "github:misterio77/nix-colors";
     #hyprland.url = "github:hyprwm/Hyprland";
     #hyprland-plugins = {
     #  url = "github:hyprwm/hyprland-plugins";
@@ -50,8 +50,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.${username} = import ./hosts/${host}/home.nix;
-          }
+          home-manager.users.${username} = import ./hosts/${host}/home.nix;}
         ];
       };
     };

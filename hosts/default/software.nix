@@ -21,17 +21,17 @@
     eza
     fastfetch
     git
-    gnome.gnome-disk-utility
-    gnome.file-roller
-    grim
+    gnome-disk-utility
+    file-roller
+    #grim
     htop
-    inxi
+    #inxi
     kate
     killall
     libnotify
     libreoffice
-    libsForQt5.ark
-    libsForQt5.kate
+    #libsForQt5.ark
+    #libsForQt5.kate
     libvirt
     lm_sensors
     lolcat
@@ -50,19 +50,21 @@
     phinger-cursors
     protonup-qt
     protontricks
+    #python3
+    #python312Packages.nose
     qimgv
     qbittorrent
     ripgrep
-    rustdesk
-    swappy
-    toybox
+    #rustdesk
+    #swappy
+    #toybox
     unrar
     unzip
     virt-viewer
     v4l-utils
     wget
-    wineWowPackages.stable
-    wineWowPackages.staging
+    #wineWowPackages.stable
+    #wineWowPackages.staging
     winetricks
     wireplumber
     wl-clipboard
