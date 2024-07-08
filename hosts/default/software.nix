@@ -4,7 +4,7 @@
   ...
 }:
 
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
 
 {
    environment.systemPackages = with pkgs; [
@@ -22,6 +22,8 @@
     fastfetch
     git
     gnome.gnome-disk-utility
+    gnome.file-roller
+    grim
     htop
     inxi
     kate
@@ -29,6 +31,7 @@
     libnotify
     libreoffice
     libsForQt5.ark
+    libsForQt5.kate
     libvirt
     lm_sensors
     lolcat
@@ -44,6 +47,11 @@
     okular
     playerctl
     polkit_gnome
+    phinger-cursors
+    protonup-qt
+    protontricks
+    qimgv
+    qbittorrent
     ripgrep
     rustdesk
     swappy

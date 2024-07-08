@@ -22,7 +22,7 @@
   outputs = { nixpkgs, home-manager, nixos-cosmic, ... }@inputs:
   let
     system = "x86_64-linux";
-    host = default;
+    host = "default";
     username = "ronald";
   in {
     nixosConfigurations = {
