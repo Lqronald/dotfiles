@@ -40,13 +40,13 @@
     #  tmpfsSize = "30%";
     #};
 
-    #boot.kernel.sysctl."kernel.sysrq" = 1;
+    kernel.sysctl."kernel.sysrq" = 1;
 
-    #boot.plymouth.enable = true;
-    #boot.plymouth.theme = "bgrt";
-    #boot.initrd.verbose = false;
-    #boot.consoleLogLevel = 0;
-    #boot.kernelParams = [ "quiet" "udev.log_level=0" ];
+    plymouth.enable = true;
+    plymouth.theme = "bgrt";
+    initrd.verbose = false;
+    consoleLogLevel = 0;
+    kernelParams = [ "quiet" "udev.log_level=0" ];
 
     # Appimage Support
     binfmt.registrations.appimage = {
@@ -57,8 +57,6 @@
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
-
-    plymouth.enable = true;
   };
 
 

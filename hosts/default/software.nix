@@ -9,12 +9,12 @@
 {
    environment.systemPackages = with pkgs; [
     appimage-run
-    brightnessctl
+    #brightnessctl
     btop
     cava
     cpufetch
     cmatrix
-    curl
+    #curl
     cowsay
     dolphin
     duf
@@ -22,13 +22,14 @@
     fastfetch
     git
     gnome-disk-utility
-    file-roller
+    #file-roller
     #grim
     htop
     #inxi
     kate
+    kdePackages.kcmutils
     killall
-    libnotify
+    #libnotify
     libreoffice
     #libsForQt5.ark
     #libsForQt5.kate
@@ -37,24 +38,23 @@
     lolcat
     lsd
     lshw
-    lxqt.lxqt-policykit
+    #lxqt.lxqt-policykit
     material-icons
     meld
     micro
-    neofetch
+    # neofetch
     networkmanagerapplet
     noto-fonts-color-emoji
     okular
-    playerctl
-    polkit_gnome
+    #playerctl
+    #polkit_gnome
     phinger-cursors
     protonup-qt
     protontricks
-    #python3
     #python312Packages.nose
-    qimgv
+    #qimgv
     qbittorrent
-    ripgrep
+    #ripgrep
     #rustdesk
     #swappy
     #toybox
@@ -66,11 +66,10 @@
     #wineWowPackages.stable
     #wineWowPackages.staging
     winetricks
-    wireplumber
-    wl-clipboard
-    ydotool
+    #wireplumber
+    #wl-clipboard
+    #ydotool
   ];
-
 
   programs = {
     firefox.enable = true;
@@ -144,9 +143,9 @@
       };
     };
     dconf.enable = true;
-    fuse.userAllowOther = true;
+    #fuse.userAllowOther = true;
     gnupg.agent = {
-      enable = true;
+      enable = false;
       enableSSHSupport = true;
     };
 

@@ -116,15 +116,16 @@ in
    # })
   ];
 
-  programs = {
-    gh.enable = true;
-    btop = {
+    programs.gh.enable = true;
+
+    programs.btop = {
       enable = true;
       settings = {
         vim_keys = true;
       };
     };
-    alacritty = {
+
+    programs.alacritty = {
       enable = true;
       settings = {
         window = {
@@ -150,8 +151,8 @@ in
 	    size = 14;
       };
     };
-  };
-    };
+   };
+
     programs.bash = {
       enable = true;
       enableCompletion = true;
@@ -161,7 +162,7 @@ in
     #    #fi
     #  '';
       initExtra = ''
-        neofetch
+        fastfetch
         if [ -f $HOME/.bashrc-personal ]; then
           source $HOME/.bashrc-personal
         fi
@@ -188,5 +189,6 @@ in
       dot = "cd ~/.dotfiles";
       };
     };
+
     programs.home-manager.enable = true;
 }

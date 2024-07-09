@@ -17,8 +17,8 @@ in
         "networkmanager"
         "wheel"
         "libvirtd"
-        "scanner"
-        "lp"
+        #"scanner"
+        #"lp"
       ];
       shell = pkgs.bash;
       ignoreShellProgramCheck = true;
@@ -36,7 +36,7 @@ in
     # };
   };
 
-    users = {
+  users = {
     mutableUsers = true;
   };
 }
