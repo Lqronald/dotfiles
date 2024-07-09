@@ -1,6 +1,6 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "ronald";
+  gitUsername = "lqronald";
   gitEmail = "lqronald@gmail.com";
 
 }
