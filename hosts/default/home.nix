@@ -171,7 +171,9 @@ in
       rebuild="sudo nixos-rebuild switch";
       fu="sudo nix flake update /home/${username}/.dotfiles";
       fr="sudo nixos-rebuild switch --flake .";
+      frc="sudo nixos-rebuild switch --flake . --option eval-cache false";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
+      ii="nix-shell -p nix-info --run nix-info -m";
       #ls="lsd";
       #ll="lsd -l";
       #la="lsd -a";

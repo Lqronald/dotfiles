@@ -51,7 +51,8 @@
     phinger-cursors
     protonup-qt
     protontricks
-    #python312Packages.nose
+    python312
+    python312Packages.xlib
     #qimgv
     qbittorrent
     #ripgrep
