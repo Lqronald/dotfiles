@@ -1,25 +1,18 @@
 {
-  description = "Hyprnix";
+  description = "PlasmaNix";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    #nix-colors.url = "github:misterio77/nix-colors";
-    #hyprland.url = "github:hyprwm/Hyprland";
-    #hyprland-plugins = {
-    #  url = "github:hyprwm/hyprland-plugins";
-    #  inputs.hyprland.follows = "hyprland";
+    #nixos-plasma = {
+      #url = "github:lilyinstarlight/nixos-cosmic";
+      #inputs.nixpkgs.follows = "nixpkgs";
     #};
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
-  outputs = { nixpkgs, home-manager, nixos-cosmic, ... }@inputs:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
   let
     system = "x86_64-linux";
     host = "default";
@@ -34,23 +27,18 @@
               inherit host;
             };
         modules = [
-          { nix.settings = {
-              #substituters = [ "https://cosmic.cachix.org/" ];
-              #trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-            };
-          }
-          nixos-cosmic.nixosModules.default
           ./hosts/${host}/config.nix
           home-manager.nixosModules.home-manager {
-          home-manager.extraSpecialArgs = {
-            inherit username;
-            inherit inputs;
-            inherit host;
-          };
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "backup";
-          home-manager.users.${username} = import ./hosts/${host}/home.nix;}
+            home-manager.extraSpecialArgs = {
+              inherit username;
+              inherit inputs;
+              inherit host;
+            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.${username} = import ./hosts/${host}/home.nix;
+          }
         ];
       };
     };

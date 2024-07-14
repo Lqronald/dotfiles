@@ -9,67 +9,42 @@
 {
    environment.systemPackages = with pkgs; [
     appimage-run
-    #brightnessctl
     btop
     cava
     cpufetch
     cmatrix
-    #curl
-    cowsay
     dolphin
     duf
     eza
-    fastfetch
+    #fastfetch
     git
     gnome-disk-utility
-    #file-roller
-    #grim
     htop
     #inxi
     kate
+    kdePackages.kcalc
     kdePackages.kcmutils
     killall
-    #libnotify
     libreoffice
-    #libsForQt5.ark
-    #libsForQt5.kate
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
     libvirt
-    lm_sensors
-    lolcat
-    lsd
-    lshw
-    #lxqt.lxqt-policykit
-    material-icons
     meld
     micro
-    # neofetch
-    networkmanagerapplet
-    noto-fonts-color-emoji
+    mpv
+    neofetch
     okular
-    #playerctl
-    #polkit_gnome
-    phinger-cursors
     protonup-qt
     protontricks
-    python312
-    python312Packages.xlib
-    #qimgv
     qbittorrent
     #ripgrep
-    #rustdesk
-    #swappy
-    #toybox
-    unrar
-    unzip
+    rustdesk
+    #spotify
     virt-viewer
     v4l-utils
     wget
-    #wineWowPackages.stable
-    #wineWowPackages.staging
     winetricks
-    #wireplumber
-    #wl-clipboard
-    #ydotool
+    kdePackages.yakuake
   ];
 
   programs = {
@@ -159,13 +134,13 @@
       dedicatedServer.openFirewall = true;
     };
 
-    thunar = {
-      enable = false;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
+    #thunar = {
+    # enable = false;
+    #  plugins = with pkgs.xfce; [
+    #    thunar-archive-plugin
+    #    thunar-volman
+    #  ];
+    #};
   };
 
 }

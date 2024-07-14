@@ -11,7 +11,7 @@ in
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "24.11";
+  home.stateVersion = "24.05";
 
   # Import Program Configurations
   imports = [
@@ -78,6 +78,8 @@ in
     };
   };
 
+  # For Gnome
+
   gtk = {
     iconTheme = {
       name = "Papirus-Dark";
@@ -90,12 +92,23 @@ in
       gtk-application-prefer-dark-theme = 1;
     };
   };
-  qt = {
-    enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "gtk3";
-  };
 
+  #qt = {
+  #  enable = true;
+  #  platformTheme.name = "gtk3";
+  #  style.name = "adwaita-dark";
+  #};
+
+  #qt = {
+  #  enable = true;
+  #  platformTheme.name = "qtct";
+  #  style.name = "kvantum";
+  #};
+
+  #xdg.configFile = {
+  #  "Kvantum/ArcDark".source = "${pkgs.arc-kde-theme}/share/Kvantum/ArcDark";
+  #  "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=ArcDark";
+  #};
 
   # Scripts
   home.packages = [
@@ -162,7 +175,7 @@ in
     #    #fi
     #  '';
       initExtra = ''
-        fastfetch
+        neofetch
         if [ -f $HOME/.bashrc-personal ]; then
           source $HOME/.bashrc-personal
         fi
@@ -184,6 +197,8 @@ in
       "cd.." = "cd ..";
       df = "df -h";
       cat = "bat";
+      logout = "qdbus org.kde.Shutdown /Shutdown logout";
+      #logout = "pkill -u $USER";
       reboot = "systemctl reboot";
       re = "systemctl reboot";
       shutdown = "systemctl poweroff";
