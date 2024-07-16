@@ -107,11 +107,11 @@
     wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-kde
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-kde
     ];
   };
 
@@ -159,7 +159,7 @@
   };
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  #sound.enable = true;
   hardware.pulseaudio.enable = false;
 
   services.displayManager.sddm.enable = true;
