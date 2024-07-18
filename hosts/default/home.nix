@@ -183,8 +183,10 @@ in
       shellAliases = {
       rebuild="sudo nixos-rebuild switch";
       fu="sudo nix flake update /home/${username}/.dotfiles";
-      fr="sudo nixos-rebuild switch --flake .";
+      fr="sudo nixos-rebuild switch --flake . --verbose --show-trace";
       frc="sudo nixos-rebuild switch --flake . --option eval-cache false";
+      gens="nix profile history --profile /nix/var/nix/profiles/system";
+      prof="cd /nix/var/nix/profiles && ls";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       ii="nix-shell -p nix-info --run nix-info -m";
       #ls="lsd";
@@ -197,12 +199,14 @@ in
       "cd.." = "cd ..";
       df = "df -h";
       cat = "bat";
+      sl ="systemctl suspend";
       logout = "qdbus org.kde.Shutdown /Shutdown logout";
       #logout = "pkill -u $USER";
       reboot = "systemctl reboot";
       re = "systemctl reboot";
       shutdown = "systemctl poweroff";
       sd = "systemctl poweroff";
+      plasma = "dbus-launch startplasma-wayland";
       dot = "cd ~/.dotfiles";
       };
     };
