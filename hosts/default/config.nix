@@ -35,10 +35,28 @@
     kernel.sysctl."kernel.sysrq" = 1;
 
     plymouth.enable = true;
-    #plymouth.theme = "bgrt";
-    #initrd.verbose = false;
-    #consoleLogLevel = 0;
-    #kernelParams = [ "quiet" "udev.log_level=0" ];
+    plymouth.theme = "bgrt";
+    initrd.verbose = false;
+    consoleLogLevel = 3;
+    kernelParams = [ "quiet" "udev.log_level=0" ];
+
+    #consoleLogLevel = 0
+    #Use Case: Completely silent boot for maximum visual cleanliness. No messages will be shown on the console.
+
+    #consoleLogLevel = 1
+    #Use Case: Only show critical alerts that require immediate action. Minimal output to highlight only the most severe issues.
+
+    #consoleLogLevel = 3
+    #Use Case: Show critical errors and below, providing insight into serious issues without overwhelming with too many details.
+
+    #consoleLogLevel = 4
+    #Use Case: Include warnings, useful for monitoring potential problems without showing all informational messages.
+
+    #consoleLogLevel = 6
+    #Use Case: Display general information about the system’s state. This is commonly used in development and testing environments.
+
+    #consoleLogLevel = 7
+    #Use Case: Show all messages, including detailed debug information. Useful for debugging and in-depth system analysis.
 
     # Appimage Support
     binfmt.registrations.appimage = {
@@ -108,10 +126,12 @@
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal
     ];
   };
 

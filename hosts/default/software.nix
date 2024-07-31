@@ -17,6 +17,7 @@
     duf
     eza
     #fastfetch
+    fzf
     git
     gnome-disk-utility
     htop
@@ -37,7 +38,7 @@
     protonup-qt
     protontricks
     qbittorrent
-    #ripgrep
+    ripgrep
     rustdesk
     #spotify
     virt-viewer
@@ -119,7 +120,7 @@
       };
     };
     dconf.enable = true;
-    #fuse.userAllowOther = true;
+    fuse.userAllowOther = true;
     gnupg.agent = {
       enable = false;
       enableSSHSupport = true;

@@ -10,7 +10,7 @@ in
 {
   users.users = {
     "${username}" = {
-      homeMode = "755";
+      homeMode = "755";  # ower read write execute, group r-x, others r-x
       isNormalUser = true;
       description = "${gitUsername}";
       extraGroups = [
@@ -36,6 +36,7 @@ in
     # };
   };
 
+  # commands such as useradd, usermod, and userdel can also be used and are persistent
   users = {
     mutableUsers = true;
   };
