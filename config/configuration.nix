@@ -2,13 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./software.nix
+
     ];
 
   # Bootloader.
@@ -114,7 +115,7 @@
   users.users.ronald = {
     isNormalUser = true;
     description = "ronald";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird

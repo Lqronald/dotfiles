@@ -13,7 +13,7 @@
     #fastfetch
     fzf
     git
-    gnome.gnome-disk-utility
+    gnome-disk-utility
     inxi
     kdePackages.kcalc
     kdePackages.kcmutils

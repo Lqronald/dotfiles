@@ -32,7 +32,7 @@
             };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."${username}" = import ./config/home.nix;
+            home-manager.users.ronald = import ./config/home.nix;
           }
         ];
       };
