@@ -164,7 +164,7 @@
       #fr="sudo nixos-rebuild switch --flake . #plasmaNix";
       fr="sudo nixos-rebuild switch --flake . --verbose --show-trace";
       frc="sudo nixos-rebuild switch --flake . --option eval-cache false";
-      gens="nix profile history --profile /nix/var/nix/profiles/system";
+      gen="nix profile history --profile /nix/var/nix/profiles/system";
       prof="cd /nix/var/nix/profiles && ls";
       garbage="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       ii="nix-shell -p nix-info --run nix-info -m";
@@ -172,7 +172,7 @@
       #ll="lsd -l";
       #la="lsd -a";
       #lal="lsd -al";
-      ls = "eza -a --icons --group-directories-first";
+      ls = "eza -a --icons --group-directories-first"
       ll = "eza -al --icons --group-directories-first";
       lt = "eza -a --tree --level=1 --icons --group-directories-first";
       "cd.." = "cd ..";

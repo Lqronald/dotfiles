@@ -16,6 +16,40 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot = {
+  #kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages;
+  # Needed For Some Steam Games
+    kernel.sysctl = {
+      "vm.max_map_count" = 1048576;
+    };
+    kernel.sysctl."kernel.sysrq" = 1;
+
+    plymouth.enable = true;
+    plymouth.theme = "bgrt";
+    initrd.verbose = false;
+    consoleLogLevel = 3;
+    kernelParams = [ "quiet" "udev.log_level=0" ];
+
+   #consoleLogLevel = 0
+    #Use Case: Completely silent boot for maximum visual cleanliness. No messages will be shown on the console.
+
+    #consoleLogLevel = 1
+    #Use Case: Only show critical alerts that require immediate action. Minimal output to highlight only the most severe issues.
+
+    #consoleLogLevel = 3
+    #Use Case: Show critical errors and below, providing insight into serious issues without overwhelming with too many details.
+
+    #consoleLogLevel = 4
+    #Use Case: Include warnings, useful for monitoring potential problems without showing all informational messages.
+
+    #consoleLogLevel = 6
+    #Use Case: Display general information about the system’s state. This is commonly used in development and testing environments.
+
+    #consoleLogLevel = 7
+    #Use Case: Show all messages, including detailed debug information. Useful for debugging and in-depth system analysis.
+  };
+
   networking.hostName = "plasmaNix"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -89,6 +123,17 @@
   # Configure console keymap
   console.keyMap = "be-latin1";
 
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts-emoji
+      noto-fonts-cjk
+      font-awesome
+      inter
+      symbola
+      material-icons
+    ];
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -110,6 +155,10 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  # Extra Logitech Support
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ronald = {
