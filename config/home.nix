@@ -181,7 +181,7 @@
       '';
       shellAliases = {
       rebuild="sudo nixos-rebuild switch";
-      fu="sudo nix flake update /home/${username}/.dotfiles";
+      fu="sudo nix flake update /home/${username}/dotfiles";
       fr="sudo nixos-rebuild switch --flake . --verbose --show-trace";
       frc="sudo nixos-rebuild switch --flake . --option eval-cache false";
       gens="nix profile history --profile /nix/var/nix/profiles/system";
