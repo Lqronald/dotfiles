@@ -15,8 +15,6 @@
     git
     gnome-disk-utility
     inxi
-    kdePackages.kcalc
-    kdePackages.kcmutils
     killall
     libreoffice
     #libsForQt5.qt5ct
@@ -37,7 +35,6 @@
     v4l-utils
     wget
     winetricks
-    kdePackages.yakuake
   ];
 
   programs = {

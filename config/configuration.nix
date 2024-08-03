@@ -19,10 +19,12 @@
   boot = {
   #kernelPackages = pkgs.linuxPackages_zen;
     kernelPackages = pkgs.linuxPackages;
+
   # Needed For Some Steam Games
     kernel.sysctl = {
       "vm.max_map_count" = 1048576;
     };
+
     kernel.sysctl."kernel.sysrq" = 1;
 
     plymouth.enable = true;
@@ -167,7 +169,9 @@
     extraGroups = [ "networkmanager" "wheel" "libvirtd"];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      kdePackages.kcalc
+      kdePackages.kcmutils
+      kdePackages.yakuake
     ];
   };
 

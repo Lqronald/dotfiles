@@ -172,7 +172,7 @@
       #ll="lsd -l";
       #la="lsd -a";
       #lal="lsd -al";
-      ls = "eza -a --icons --group-directories-first"
+      ls = "eza -a --icons --group-directories-first";
       ll = "eza -al --icons --group-directories-first";
       lt = "eza -a --tree --level=1 --icons --group-directories-first";
       "cd.." = "cd ..";
