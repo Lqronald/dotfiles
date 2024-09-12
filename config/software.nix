@@ -34,6 +34,7 @@
     #virt-viewer
     v4l-utils
     wget
+    whatsapp-for-linux
     winetricks
   ];
 
